@@ -1,14 +1,16 @@
 import tmdbsimple as tmdb
 import pandas as pd
 
+tmdb.API_KEY = '77b3e44f983ea9bfc6eae8182d00e4c9'
+
 def getActorId(name):
     id = -1
     try:
         search = tmdb.Search()
         search_results = search.person(query=name)
         id = search.results[0]['id']
-    except:
-        print('error')
+    except Exception as e:
+        print(repr(e))
     return id
 
 def getMovieCredits(actorId):
@@ -26,6 +28,3 @@ def getData(actor):
         return pd.DataFrame()
     credits = getMovieCredits(actorId)
     return toDataframe(credits)
-
-def __init__():
-    tmdb.API_KEY = ''
